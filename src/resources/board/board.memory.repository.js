@@ -3,18 +3,16 @@ const taskService = require('../task/task.service');
 
 const boards = [];
 
-const getAll = async () => boards
+const getAll = async () => boards;
 
 const createBoard = async (board) => {
   boards.push(board);
-  return board
+  return board;
 };
 
 const getById = async (id) => {
   const idx = boards.findIndex((board) => board.id === id);
-  if (idx === -1) {
-    return 404;
-  }
+  if (idx === -1) return 404;
   return boards[idx];
 };
 
@@ -26,9 +24,7 @@ const putById = async (newUser, id) => {
 
 const deleteById = async (id) => {
   const idx = boards.findIndex((task) => task.id === id);
-  if (idx === -1) {
-    return 404;
-  }
+  if (idx === -1) return 404;
   await taskService.deleteBoard(id);
   boards.splice(idx, 1);
   return 204;

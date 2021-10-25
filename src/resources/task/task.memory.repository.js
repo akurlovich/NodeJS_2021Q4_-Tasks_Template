@@ -11,9 +11,7 @@ const createTask = async (task) => {
 
 const getById = async (id) => {
   const idx = tasks.findIndex((task) => task.id === id);
-  if (idx === -1) {
-    return 404;
-  }
+  if (idx === -1) return 404;
   return tasks[idx];
 };
 
@@ -25,9 +23,7 @@ const putById = async (newUser, id) => {
 
 const deleteById = async (id) => {
   const idx = tasks.findIndex((task) => task.id === id);
-  if (idx === -1) {
-    return 404;
-  }
+  if (idx === -1) return 404;
   tasks.splice(idx, 1);
   return 204;
 };
@@ -42,9 +38,7 @@ const deleteUser = async (id) => {
     }
     return task;
   });
-  if (idx === -1) {
-    return 404;
-  }
+  if (idx === -1) return 404;
   return 204;
 };
 const deleteBoard = async (id) => {
