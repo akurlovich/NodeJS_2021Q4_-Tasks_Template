@@ -2,7 +2,7 @@ const boardsRepo = require('./board.memory.repository');
 
 const getAll = () => boardsRepo.getAll();
 
-const createBoard = (user) => boardsRepo.createBoard(user);
+const createBoard = (board) => boardsRepo.createBoard(board);
 
 const getById = (id) => boardsRepo.getById(id);
 

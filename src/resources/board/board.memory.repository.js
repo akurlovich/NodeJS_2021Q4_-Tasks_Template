@@ -6,13 +6,14 @@ const boards = [];
 const getAll = async () => boards;
 
 const createBoard = async (board) => {
-  boards.push(board);
-  return board;
+  const newBoard = new Board(board);
+  boards.push(newBoard);
+  return newBoard;
 };
 
 const getById = async (id) => {
   const idx = boards.findIndex((board) => board.id === id);
-  if (idx === -1) return 404;
+  if (idx === -1) return false;
   return boards[idx];
 };
 

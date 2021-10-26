@@ -2,34 +2,45 @@ const { Router } = require('express');
 
 const router = new Router();
 const boardsService = require('./board.service');
-const Board = require('./board.model');
-const Column = require('../column/column.model');
 
 router.get('/', async (req, res) => {
-  const boards = await boardsService.getAll();
-  res.json(boards);
+  try {
+    const boards = await boardsService.getAll();
+    if (boards) {
+      res.json(boards);
+    } else {
+      res.status(400).json({message: 'Bad request'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 router.post('/', async (req, res) => {
-  const boardRaw = req.body;
-  boardRaw.columns = boardRaw.columns.map((col)=>new Column(col));
-  const board = await boardsService.createBoard(new Board(boardRaw));
+  // const boardBody = req.body;
+  // boardRaw.columns = boardRaw.columns.map((col)=>new Column(col));
+  const board = await boardsService.createBoard(req.body);
   res.status(201).json(board);
 });
 
 router.get('/:id', async (req, res) => {
-  const board = await boardsService.getById(req.params.id);
-  if (board === 404 ) {
-    res.status(404).send();
-  }else{
-    res.json(board);
+  try {
+    const board = await boardsService.getById(req.params.id);
+    if (board) {
+      res.json(board);
+    } else {
+      res.status(404).send();
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
   }
+
 });
 
 router.put('/:id', async (req, res) => {
-  const boardRaw = req.body;
-  boardRaw.columns = boardRaw.columns.map((col) => new Column(col));
-  const board = await boardsService.putById(boardRaw, req.params.id);
+  // const boardBody = req.body;
+  // boardRaw.columns = boardRaw.columns.map((col) => new Column(col));
+  const board = await boardsService.putById(req.body, req.params.id);
   res.json(board);
 });
 
