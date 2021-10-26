@@ -14,6 +14,7 @@ const getById = async (id) => users.find((user) => user.id === id);
 
 const putById = async (newUser, id) => {
   const idx = users.findIndex((user) => user.id === id);
+  if (idx === -1) return false;
   users[idx] = new User({ id, ...newUser });
   return users[idx];
 };
