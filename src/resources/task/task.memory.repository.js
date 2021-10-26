@@ -5,18 +5,20 @@ let tasks = [];
 const getAll = async () => tasks;
 
 const createTask = async (task) => {
-  tasks.push(task);
-  return task;
+  const newTask = new Task(task);
+  tasks.push(newTask);
+  return newTask;
 };
 
 const getById = async (id) => {
   const idx = tasks.findIndex((task) => task.id === id);
-  if (idx === -1) return 404;
+  if (idx === -1) return false;
   return tasks[idx];
 };
 
 const putById = async (newUser, id) => {
   const idx = tasks.findIndex((task) => task.id === id);
+  if (idx === -1) return false;
   tasks[idx] = new Task({ id, ...newUser });
   return tasks[idx];
 };
@@ -27,21 +29,6 @@ const deleteById = async (id) => {
   tasks.splice(idx, 1);
   return 204;
 };
-
-// const deleteUser = async (id) => {
-//   let idx = -1;
-//   tasks = tasks.map(task => {
-//     if (task.userId === id) {
-//       const copy = { ...task };
-//       copy.userId = null;
-//       idx = task.id;
-//       return copy;
-//     }
-//     return task;
-//   });
-//   if (idx === -1) return 404;
-//   return 204;
-// };
 
 const deleteUser = async (id) => {
   tasks = tasks.map(task => {

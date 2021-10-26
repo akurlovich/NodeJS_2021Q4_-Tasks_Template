@@ -1,38 +1,74 @@
 const { Router } = require('express');
+const tasksService = require('./task.service');
 
 const router = new Router();
-const tasksService = require('./task.service');
-const Task = require('./task.model');
 
 router.get('/:boardId/tasks/', async (req, res) => {
-  const tasks = await tasksService.getAll();
-  res.json(tasks);
-});
-
-router.post('/:boardId/tasks/', async (req, res) => {
-  const newTask = {...req.body}
-  newTask.boardId = req.params.boardId
-  const task = await tasksService.createTask(new Task(newTask));
-  res.status(201).json(task);
+  try {
+    const tasks = await tasksService.getAll();
+    if (tasks) {
+      res.json(tasks);
+    } else {
+      res.status(400).json({message: 'Bad request'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 router.get('/:boardId/tasks/:id', async (req, res) => {
-  const task = await tasksService.getById(req.params.id);
-  if (task === 404) {
-    res.status(404).send();
-  } else {
-    res.json(task);
+  try {
+    const task = await tasksService.getById(req.params.id);
+    if (task) {
+      res.json(task);
+    } else {
+      res.status(404).json({message: 'Not found'});
+    }
+    
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
+});
+
+router.post('/:boardId/tasks/', async (req, res) => {
+  try {
+    const newTask = {...req.body}
+    newTask.boardId = req.params.boardId
+    const task = await tasksService.createTask(newTask);
+    if (task) {
+      res.status(201).json(task);
+    } else {
+      res.status(400).json({message: 'Bad request'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
   }
 });
 
 router.put('/:boardId/tasks/:id', async (req, res) => {
-  const task = await tasksService.putById(req.body, req.params.id);
-  res.json(task);
+  try {
+    const task = await tasksService.putById(req.body, req.params.id);
+    if (task) {
+      res.json(task);
+    } else {
+      res.status(404).json({message: 'Not found'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 router.delete('/:boardId/tasks/:id', async (req, res) => {
-  const status = await tasksService.deleteById(req.params.id);
-  res.status(status).send();
+  try {
+    const status = await tasksService.deleteById(req.params.id);
+    if (status) {
+      res.status(status).send();
+    } else {
+      res.status(404).json({message: 'Not found'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 module.exports = router;
