@@ -27,20 +27,32 @@ const deleteById = async (id) => {
   tasks.splice(idx, 1);
   return 204;
 };
+
+// const deleteUser = async (id) => {
+//   let idx = -1;
+//   tasks = tasks.map(task => {
+//     if (task.userId === id) {
+//       const copy = { ...task };
+//       copy.userId = null;
+//       idx = task.id;
+//       return copy;
+//     }
+//     return task;
+//   });
+//   if (idx === -1) return 404;
+//   return 204;
+// };
+
 const deleteUser = async (id) => {
-  let idx = -1;
   tasks = tasks.map(task => {
     if (task.userId === id) {
-      const copy = { ...task };
-      copy.userId = null;
-      idx = task.id;
-      return copy;
+      const newTask = Object.assign(task, {userId:null});
+      return newTask
     }
     return task;
   });
-  if (idx === -1) return 404;
-  return 204;
 };
+
 const deleteBoard = async (id) => {
   tasks = tasks.filter(task => {
     if (task.boardId === id) {
@@ -48,7 +60,6 @@ const deleteBoard = async (id) => {
     }
     return task;
   });
-  return 204;
 };
 module.exports = { getAll, createTask, getById, putById, deleteById, deleteUser, deleteBoard };
 

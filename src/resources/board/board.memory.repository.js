@@ -24,10 +24,10 @@ const putById = async (newUser, id) => {
 
 const deleteById = async (id) => {
   const idx = boards.findIndex((task) => task.id === id);
-  if (idx === -1) return 404;
+  if (idx === -1) return false;
   await taskService.deleteBoard(id);
   boards.splice(idx, 1);
-  return 204;
+  return true;
 };
 
 module.exports = { getAll, createBoard, getById, putById, deleteById };

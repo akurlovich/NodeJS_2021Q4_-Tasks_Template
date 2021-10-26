@@ -1,4 +1,3 @@
-// const { use } = require('chai');
 const { Router } = require('express');
 const User = require('./user.model');
 const usersService = require('./user.service');
@@ -71,6 +70,5 @@ router.delete('/:id', async (req, res) => {
   }
   
 });
-
 
 module.exports = router;

@@ -34,8 +34,16 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  const status = await boardsService.deleteById(req.params.id);
-  res.status(status).send();
+  try {
+    const status = await boardsService.deleteById(req.params.id);
+    if (status) {
+      res.status(204).json({message: 'The user has been deleted'});
+    } else {
+      res.status(404).json({message: 'User not found'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 module.exports = router;
