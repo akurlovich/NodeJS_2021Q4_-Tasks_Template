@@ -21,10 +21,10 @@ const putById = async (newUser, id) => {
 
 const deleteById = async (id) => {
   const idx = users.findIndex((user) => user.id === id);
-  if (idx === -1) return 404;
+  if (idx === -1) return false;
   await taskService.deleteUser(id);
   users.splice(idx, 1);
-  return 204;
+  return true;
 };
 
 module.exports = { getAll, createUser, getById, putById, deleteById };

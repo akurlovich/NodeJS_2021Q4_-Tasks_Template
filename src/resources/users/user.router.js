@@ -1,3 +1,4 @@
+// const { use } = require('chai');
 const { Router } = require('express');
 const User = require('./user.model');
 const usersService = require('./user.service');
@@ -5,24 +6,43 @@ const usersService = require('./user.service');
 const router = new Router();
 
 router.get('/', async (req, res) => {
-  const users = await usersService.getAll();
-  res.json(users.map(User.toResponse));
+  try {
+    const users = await usersService.getAll();
+    if (users) {
+      res.json(users.map(User.toResponse));
+    } else {
+      res.status(400).json({message: 'Bad request'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 router.post('/', async (req, res) => {
-  const user = await usersService.createUser(new User(req.body));
-  res.status(201).json(User.toResponse(user));
+  try {
+    const user = await usersService.createUser(new User(req.body));
+    if (user) {
+      res.status(201).json(User.toResponse(user));
+    } else {
+      res.status(400).json({message: 'Bad request'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
 
 router.get('/:id', async (req, res) => {
-  const user = await usersService.getById(req.params.id);
-  res.json(User.toResponse(user));
+  try {
+    const user = await usersService.getById(req.params.id);
+    if (user) {
+      res.json(User.toResponse(user));
+    } else {
+      res.status(404).json({message: 'User not found'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
 });
-
-// router.put('/:id', async (req, res) => {
-//   const user = await usersService.putById(req.body, req.params.id);
-//   res.json(User.toResponse(user));
-// });
 
 router.put('/:id', async (req, res) => {
   try {
@@ -30,17 +50,26 @@ router.put('/:id', async (req, res) => {
     if (user) {
       res.status(200).json(User.toResponse(user));
     } else {
-      res.status(400).json('Bad request');
+      res.status(400).json({message: 'Bad request'});
     }
   } catch (error) {
-    res.status(401).json('Access token is missing or invalid');
+    res.status(401).json({message: 'Access token is missing or invalid'});
   }
 
 });
 
 router.delete('/:id', async (req, res) => {
-  const status = await usersService.deleteById(req.params.id);
-  res.status(status).send();
+  try {
+    const status = await usersService.deleteById(req.params.id);
+    if (status) {
+      res.status(204).json({message: 'The user has been deleted'});
+    } else {
+      res.status(404).json({message: 'User not found'});
+    }
+  } catch (error) {
+    res.status(401).json({message: 'Access token is missing or invalid'});
+  }
+  
 });
 
 
