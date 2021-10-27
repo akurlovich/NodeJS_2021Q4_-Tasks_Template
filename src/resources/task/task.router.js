@@ -1,5 +1,5 @@
-const { Router } = require('express');
-const tasksService = require('./task.service');
+import { Router } from 'express';
+import tasksService from './task.service.js';
 
 const router = new Router();
 
@@ -71,4 +71,4 @@ router.delete('/:boardId/tasks/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const Board = require('./board.model');
-const taskService = require('../task/task.service');
+import Board from './board.model.js';
+import taskService from '../task/task.service.js';
 
 const boards = [];
 
@@ -31,5 +31,5 @@ const deleteById = async (id) => {
   return true;
 };
 
-module.exports = { getAll, createBoard, getById, putById, deleteById };
+export default { getAll, createBoard, getById, putById, deleteById };
 

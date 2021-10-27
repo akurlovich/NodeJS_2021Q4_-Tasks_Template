@@ -1,7 +1,7 @@
-const { Router } = require('express');
+import { Router } from 'express';
+import boardsService from './board.service.js';
 
 const router = new Router();
-const boardsService = require('./board.service');
 
 router.get('/', async (req, res) => {
   try {
@@ -57,4 +57,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

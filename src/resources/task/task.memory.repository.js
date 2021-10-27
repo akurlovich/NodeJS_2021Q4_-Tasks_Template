@@ -1,4 +1,4 @@
-const Task = require('./task.model');
+import Task from './task.model.js';
 
 let tasks = [];
 
@@ -48,5 +48,5 @@ const deleteBoard = async (id) => {
     return task;
   });
 };
-module.exports = { getAll, createTask, getById, putById, deleteById, deleteUser, deleteBoard };
+export default { getAll, createTask, getById, putById, deleteById, deleteUser, deleteBoard };
 

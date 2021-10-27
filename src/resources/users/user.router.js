@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const User = require('./user.model');
-const usersService = require('./user.service');
+import { Router } from 'express';
+import User from './user.model.js';
+import usersService from './user.service.js';
 
 const router = new Router();
 
@@ -84,4 +84,4 @@ router.delete('/:id', async (req, res) => {
   
 });
 
-module.exports = router;
+export default router;
