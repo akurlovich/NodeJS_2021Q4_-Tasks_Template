@@ -13,7 +13,20 @@ router.get('/', async (req, res) => {
       res.status(400).json({message: 'Bad request'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await usersService.getAll();
+    if (users) {
+      res.json(users.map(User.toResponse));
+    } else {
+      res.status(400).json({message: 'Bad request'});
+    }
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
@@ -26,7 +39,7 @@ router.post('/', async (req, res) => {
       res.status(400).json({message: 'Bad request'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
@@ -39,7 +52,7 @@ router.get('/:id', async (req, res) => {
       res.status(404).json({message: 'User not found'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
@@ -52,7 +65,7 @@ router.put('/:id', async (req, res) => {
       res.status(400).json({message: 'Bad request'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 
 });
@@ -66,7 +79,7 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({message: 'User not found'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
   
 });

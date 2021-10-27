@@ -12,7 +12,7 @@ router.get('/:boardId/tasks/', async (req, res) => {
       res.status(400).json({message: 'Bad request'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
@@ -26,7 +26,7 @@ router.get('/:boardId/tasks/:id', async (req, res) => {
     }
     
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
@@ -41,7 +41,7 @@ router.post('/:boardId/tasks/', async (req, res) => {
       res.status(400).json({message: 'Bad request'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
@@ -54,7 +54,7 @@ router.put('/:boardId/tasks/:id', async (req, res) => {
       res.status(404).json({message: 'Not found'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
@@ -67,7 +67,7 @@ router.delete('/:boardId/tasks/:id', async (req, res) => {
       res.status(404).json({message: 'Not found'});
     }
   } catch (error) {
-    res.status(401).json({message: 'Access token is missing or invalid'});
+    res.status(500).json(error);
   }
 });
 
