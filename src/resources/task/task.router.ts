@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import tasksService from './task.service';
 
-const router = new Router();
+const router = Router();
 
 router.get('/:boardId/tasks/', async (req, res) => {
   try {

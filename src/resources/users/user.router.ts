@@ -1,8 +1,11 @@
-import { Router } from 'express';
+// import { Router } from 'express';
+import { Router } from "express";
+import { IUser } from "../../types/types";
 import User from './user.model';
 import usersService from './user.service';
 
-const router = new Router();
+// const router = new Router();
+const router = Router();
 
 router.get('/', async (req, res) => {
   try {
@@ -32,7 +35,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const user = await usersService.createUser(new User(req.body));
+    const user = await usersService.createUser((new User(req.body)) as IUser);
     if (user) {
       res.status(201).json(User.toResponse(user));
     } else {

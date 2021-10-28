@@ -1,36 +1,37 @@
+import { ITask } from '../../types/types';
 import Task from './task.model';
 
-let tasks = [];
+let tasks: ITask[] = [];
 
 const getAll = async () => tasks;
 
-const createTask = async (task) => {
+const createTask = async (task: ITask) => {
   const newTask = new Task(task);
   tasks.push(newTask);
   return newTask;
 };
 
-const getById = async (id) => {
+const getById = async (id: string) => {
   const idx = tasks.findIndex((task) => task.id === id);
   if (idx === -1) return false;
   return tasks[idx];
 };
 
-const putById = async (newUser, id) => {
+const putById = async (newUser: ITask, id: string) => {
   const idx = tasks.findIndex((task) => task.id === id);
   if (idx === -1) return false;
-  tasks[idx] = new Task({ id, ...newUser });
+  tasks[idx] = new Task({ ...newUser });
   return tasks[idx];
 };
 
-const deleteById = async (id) => {
+const deleteById = async (id: string) => {
   const idx = tasks.findIndex((task) => task.id === id);
   if (idx === -1) return 404;
   tasks.splice(idx, 1);
   return 204;
 };
 
-const deleteUser = async (id) => {
+const deleteUser = async (id: string) => {
   tasks = tasks.map(task => {
     if (task.userId === id) {
       const newTask = Object.assign(task, {userId:null});
@@ -40,7 +41,7 @@ const deleteUser = async (id) => {
   });
 };
 
-const deleteBoard = async (id) => {
+const deleteBoard = async (id: string) => {
   tasks = tasks.filter(task => {
     if (task.boardId === id) {
       return false;
