@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
+import { ITask } from '../../types/types';
 
-class Task {
+export default class Task {
   id: string;
   title: string;
   order: number;
@@ -8,6 +9,7 @@ class Task {
   userId: string;
   boardId: string;
   columnId: string;
+
   constructor({
     id = v4(),
     title = "title",
@@ -16,7 +18,7 @@ class Task {
     boardId = '',
     userId = '',
     columnId = '',
-  } = {}) {
+  } = {} as ITask) {
     this.id = id;
     this.title = title;
     this.order = order;
@@ -25,6 +27,4 @@ class Task {
     this.boardId = boardId;
     this.columnId = columnId;
   }
-}
-
-export default Task;
+};
