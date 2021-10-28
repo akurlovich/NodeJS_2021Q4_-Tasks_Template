@@ -1,4 +1,4 @@
-import boardsRepo from './board.memory.repository.js';
+import boardsRepo from './board.memory.repository';
 
 const getAll = () => boardsRepo.getAll();
 

@@ -1,5 +1,5 @@
-import User from './user.model.js';
-import taskService from '../task/task.service.js';
+import User from './user.model';
+import taskService from '../task/task.service';
 
 const users = [];
 

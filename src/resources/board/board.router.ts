@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import boardsService from './board.service.js';
+import boardsService from './board.service';
 
 const router = new Router();
 

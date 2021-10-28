@@ -1,4 +1,4 @@
-import tasksRepo from './task.memory.repository.js';
+import tasksRepo from './task.memory.repository';
 
 const getAll = () => tasksRepo.getAll();
 

@@ -3,9 +3,9 @@ import * as swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from'yamljs';
 
-import userRouter from './resources/users/user.router.js';
-import boardRouter from './resources/board/board.router.js';
-import taskRouter from './resources/task/task.router.js';
+import userRouter from './resources/users/user.router';
+import boardRouter from './resources/board/board.router';
+import taskRouter from './resources/task/task.router';
 
 const app = express();
 const __dirname = path.resolve(path.dirname(''));

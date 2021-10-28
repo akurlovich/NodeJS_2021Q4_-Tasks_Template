@@ -1,15 +1,22 @@
 import { v4 } from 'uuid';
 
 class Task {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  boardId: string;
+  columnId: string;
   constructor({
-                id = v4(),
-                title="title",
-                order=0,
-                description=null,
-                boardId=null,
-                userId=null,
-                columnId=null,
-              } = {}) {
+    id = v4(),
+    title = "title",
+    order = 0,
+    description = '',
+    boardId = '',
+    userId = '',
+    columnId = '',
+  } = {}) {
     this.id = id;
     this.title = title;
     this.order = order;

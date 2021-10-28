@@ -1,4 +1,4 @@
-import Task from './task.model.js';
+import Task from './task.model';
 
 let tasks = [];
 

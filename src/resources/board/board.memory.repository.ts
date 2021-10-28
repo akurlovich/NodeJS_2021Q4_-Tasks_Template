@@ -1,5 +1,5 @@
-import Board from './board.model.js';
-import taskService from '../task/task.service.js';
+import Board from './board.model';
+import taskService from '../task/task.service';
 
 const boards = [];
 

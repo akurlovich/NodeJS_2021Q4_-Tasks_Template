@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import tasksService from './task.service.js';
+import tasksService from './task.service';
 
 const router = new Router();
 

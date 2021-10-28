@@ -1,4 +1,4 @@
-import usersRepo from './user.memory.repository.js';
+import usersRepo from './user.memory.repository';
 
 const getAll = () => usersRepo.getAll();
 
