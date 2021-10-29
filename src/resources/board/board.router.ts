@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import boardsService from './board.service';
 
-const router = new Router();
+const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const boards = await boardsService.getAll();
     if (boards) {

@@ -7,7 +7,7 @@ import usersService from './user.service';
 // const router = new Router();
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const users = await usersService.getAll();
     if (users) {
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const users = await usersService.getAll();
     if (users) {
